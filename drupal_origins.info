@@ -1,0 +1,43 @@
+name = Base
+description = The basic emergya profile
+core = 7.x
+
+# Core extensions
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = update
+
+# Contrib Extensions
+dependencies[] = captcha
+dependencies[] = pathauto
+dependencies[] = transliteration
+dependencies[] = coffee
+dependencies[] = jquery_update
+dependencies[] = libraries
+dependencies[] = diff
+dependencies[] = entity
+dependencies[] = date
+dependencies[] = date_popup
+dependencies[] = entityreference
+dependencies[] = link
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = features
+dependencies[] = elysia_cron
+dependencies[] = rules
+dependencies[] = rules_admin
+dependencies[] = ckeditor
+dependencies[] = smtp
+dependencies[] = views_bulk_operations
