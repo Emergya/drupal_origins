@@ -1,5 +1,5 @@
-name = Base
-description = The basic emergya profile
+name = Drupal Origins
+description = Drupal Origins profile
 core = 7.x
 
 # Core extensions
