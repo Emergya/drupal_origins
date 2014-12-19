@@ -16,8 +16,7 @@ function drupal_origins_install_tasks() {
 
   $tasks['drupal_origins_install_extensions'] = array(
     'display_name' => st('Install Drupal Origins extensions'),
-    'type' => 'batch',
-    // Show this task only after the Kickstart steps have bene reached.
+    'type' => 'batch',    
     'display' => strpos($current_task, 'drupal_origins_') !== FALSE,
     'dfp_settings' => array(
       'dfp_unit' => 'Drupal_Origins_Install',
