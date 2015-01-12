@@ -8,16 +8,18 @@
  */
 function drupal_origins_install_tasks() {
   $tasks = array();
-  $current_task = variable_get('install_task', 'done');
+  $drupal_origins_extensions = variable_get('drupal_origins_extensions', array());
+
+  // Selection of Drupal Origins extensions:
   $tasks['drupal_origins_extensions_form'] = array(
     'display_name' => st('Drupal origins extensions'),
     'type' => 'form',
   );
-
+  // Install extensions task:
   $tasks['drupal_origins_install_extensions'] = array(
     'display_name' => st('Install Drupal Origins extensions'),
     'type' => 'batch',    
-    'display' => strpos($current_task, 'drupal_origins_') !== FALSE,
+    'display' => !empty($drupal_origins_extensions),
     'dfp_settings' => array(
       'dfp_unit' => 'Drupal_Origins_Install',
     ),
@@ -84,8 +86,7 @@ function drupal_origins_extensions_form_submit($form, &$form_state) {
  */
 function drupal_origins_install_extensions() {
   $modules = variable_get('drupal_origins_extensions', array());
-  $batch = array();
-
+  $operations = array();
   if (!empty($modules)) {
     foreach ($modules as $module) {
       $operations[] = array('_drupal_origins_enable_module', array($module));
@@ -94,6 +95,11 @@ function drupal_origins_install_extensions() {
     // Clear caches:
     $operations[] = array('_drupal_origins_clear_caches');
   }
+
+  $batch = array(
+      'title' => t('Installing aditional Drupal Origins extensions'),
+      'operations' => $operations,
+  );
 
   return $batch;
 }
@@ -153,12 +159,23 @@ function _drupal_origins_is_valid_extension($extension) {
    return (boolean)preg_match('/drupal_origins_/', $extension);
 }
 
-function _drupal_origins_clear_caches() {
+/**
+ * Auxiliary function which clear all caches.
+ * @see drupal_origins_install_extensions.
+ * @param $context
+ */
+function _drupal_origins_clear_caches(&$context) {
   $context['message'] = t('@operation', array('@operation' => 'Clear caches'));
   drupal_flush_all_caches();
 }
 
-function _drupal_origins_enable_module() {
+/**
+ * Auxiliary function which enable a list of modules.
+ * @see drupal_origins_install_extensions.
+ * @param $module
+ * @param $context
+ */
+function _drupal_origins_enable_module($module, &$context) {
   module_enable(array($module), FALSE);
-  $context['message'] = st('Installed %module module.', array('%module' => $module_name));
+  $context['message'] = st('Installed %module module.', array('%module' => $module));
 }
