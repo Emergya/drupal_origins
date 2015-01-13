@@ -1,20 +1,3 @@
 name = Drupal Origins Security Extension
 description = Drupal Origins Security Extension
 core = 7.x
-
-# Core extensions
-dependencies[] = block
-dependencies[] = comment
-dependencies[] = contextual
-dependencies[] = help
-dependencies[] = image
-dependencies[] = list
-dependencies[] = menu
-dependencies[] = number
-dependencies[] = options
-dependencies[] = path
-dependencies[] = taxonomy
-dependencies[] = dblog
-dependencies[] = field_ui
-dependencies[] = file
-dependencies[] = update
