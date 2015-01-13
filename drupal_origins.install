@@ -167,8 +167,21 @@ function drupal_origins_install() {
     ->execute();
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
-}
 
+  # # # # # # # # # # # # # # # # # # #
+  # # Contrib modules configuration # #
+  # # # # # # # # # # # # # # # # # # #
+
+  //Define forms with captcha enabled
+  module_load_include('inc', 'captcha');
+  $captcha_point_form_ids = array(
+    'user_register_form' => 'captcha/Math',
+  );
+
+  foreach ($captcha_point_form_ids as $captcha_point_form_id => $captcha_type) {
+    captcha_set_form_id_setting($captcha_point_form_id, $captcha_type);
+  }
+}
 
 /**
  * Implements hook_install_tasks().
