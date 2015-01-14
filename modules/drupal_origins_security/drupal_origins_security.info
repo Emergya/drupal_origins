@@ -1,3 +1,12 @@
 name = Drupal Origins Security Extension
 description = Drupal Origins Security Extension
 core = 7.x
+
+; Dependencies:
+dependencies[] = field_permissions
+dependencies[] = login_security
+dependencies[] = password_policy
+dependencies[] = autologout
+dependencies[] = securepages
+dependencies[] = lopd
+dependencies[] = eu_cookie_compliance
