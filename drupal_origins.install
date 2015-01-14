@@ -239,13 +239,13 @@ function drupal_origins_install() {
 
   foreach ($elysia_jobs as $cron_key => $job) {
     // Set Job rule:
-    elysia_cron_set($cron_key, false, array('rule' => $job['job_rule']));
+    elysia_cron_set($cron_key, FALSE, array('rule' => $job['job_rule']));
     // Set Job weight:
-    elysia_cron_set($cron_key, false, array('weight' => $job['job_weight']));
+    elysia_cron_set($cron_key, FALSE, array('weight' => $job['job_weight']));
     // Set Job disabled:
-    elysia_cron_set($cron_key, false, array('disable' => $job['job_disabled']));
+    elysia_cron_set($cron_key, FALSE, array('disable' => $job['job_disabled']));
     // Set Job chanel:
-    elysia_cron_set($cron_key, false, array('context' => $job['job_channel']));
+    elysia_cron_set($cron_key, FALSE, array('context' => $job['job_channel']));
   }
 
   // jQuery Update Settings:
@@ -413,4 +413,25 @@ function _drupal_origins_filter_module_extensions($module) {
  */
 function _drupal_origins_is_valid_extension($extension) {
   return (boolean) preg_match('/drupal_origins_/', $extension);
+}
+
+/**
+ * Auxiliary function which clear all caches.
+ * @see drupal_origins_install_extensions.
+ * @param $context
+ */
+function _drupal_origins_clear_caches(&$context) {
+  $context['message'] = t('@operation', array('@operation' => 'Clear caches'));
+  drupal_flush_all_caches();
+}
+
+/**
+ * Auxiliary function which enable a list of modules.
+ * @see drupal_origins_install_extensions.
+ * @param $module
+ * @param $context
+ */
+function _drupal_origins_enable_module($module, &$context) {
+  module_enable(array($module));
+  $context['message'] = st('Installed %module module.', array('%module' => $module));
 }
