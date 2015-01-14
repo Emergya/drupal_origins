@@ -4,6 +4,252 @@
  */
 
 /**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+
+function drupal_origins_install() {
+
+  // Add filtered html text format:
+  $filtered_html_format = array(
+    'format' => 'filtered_html',
+    'name' => 'Filtered HTML',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+
+  $filtered_html_format = (object) $filtered_html_format;
+  filter_format_save($filtered_html_format);
+
+  // Add Rich HTML text format:
+  $rich_html_format = array(
+    'format' => 'rich_html',
+    'name' => 'Rich HTML',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+        'settings' => array(
+          'allowed_html' => '<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd> <span> <p> <div> <h2> <h3> <h4> <img>',
+          'filter_html_help' => 1,
+          'filter_html_nofollow' => 0,
+        ),
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+
+  $rich_html_format = (object) $rich_html_format;
+  filter_format_save($rich_html_format);
+
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+    array(
+      'type' => 'page',
+      'name' => st('Basic page'),
+      'base' => 'node_content',
+      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type);
+  }
+
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+
+  // Enable user picture support and set the default to a square thumbnail option.
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Allow visitor account creation with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+
+  // Enable default permissions for system roles.
+  $filtered_html_permission = filter_permission_name($filtered_html_format);
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
+    'access content',
+    'access comments',
+    $filtered_html_permission
+  ));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
+    'access content',
+    'access comments',
+    'post comments',
+    'skip comment approval',
+    $filtered_html_permission
+  ));
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Create a Home link in the main menu.
+  $item = array(
+    'link_title' => st('Home'),
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+  );
+  menu_link_save($item);
+
+  // Update the menu router information.
+  menu_rebuild();
+
+  // Enable the admin theme.
+  db_update('system')
+    ->fields(array('status' => 1))
+    ->condition('type', 'theme')
+    ->condition('name', 'seven')
+    ->execute();
+  variable_set('admin_theme', 'seven');
+  variable_set('node_admin_theme', '1');
+
+  # # # # # # # # # # # # # # # # # # #
+  # # Contrib modules configuration # #
+  # # # # # # # # # # # # # # # # # # #
+
+  // Define forms with captcha enabled:
+  module_load_include('inc', 'captcha');
+  $captcha_point_form_ids = array(
+    'user_register_form' => 'captcha/Math',
+  );
+
+  foreach ($captcha_point_form_ids as $captcha_point_form_id => $captcha_type) {
+    captcha_set_form_id_setting($captcha_point_form_id, $captcha_type);
+  }
+
+  // Define default settings for pathauto module:
+  variable_set('pathauto_transliterate', 1);
+
+  // Elysia cron jobs:
+  $elysia_jobs = array(
+    'captcha_cron' => array(
+      'job_rule' => '4 0 * * *',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'ctools_cron' => array(
+      'job_rule' => '4 0 * * *',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'dblog_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'field_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'node_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'system_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'update_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'views_bulk_operations_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+  );
+
+  foreach ($elysia_jobs as $cron_key => $job) {
+    // Set Job rule:
+    elysia_cron_set($cron_key, false, array('rule' => $job['job_rule']));
+    // Set Job weight:
+    elysia_cron_set($cron_key, false, array('weight' => $job['job_weight']));
+    // Set Job disabled:
+    elysia_cron_set($cron_key, false, array('disable' => $job['job_disabled']));
+    // Set Job chanel:
+    elysia_cron_set($cron_key, false, array('context' => $job['job_channel']));
+  }
+}
+
+/**
  * Implements hook_install_tasks().
  */
 function drupal_origins_install_tasks() {
@@ -97,8 +343,8 @@ function drupal_origins_install_extensions() {
   }
 
   $batch = array(
-      'title' => t('Installing aditional Drupal Origins extensions'),
-      'operations' => $operations,
+    'title' => t('Installing aditional Drupal Origins extensions'),
+    'operations' => $operations,
   );
 
   return $batch;
@@ -133,7 +379,7 @@ function _drupal_origins_get_renderable_module_dependencies($module) {
     ),
     '#states' => array(
       'visible' => array(
-        ':input[name="' . $module->name .'"]' => array('checked' => TRUE),
+        ':input[name="' . $module->name . '"]' => array('checked' => TRUE),
       ),
     ),
   );
@@ -156,5 +402,5 @@ function _drupal_origins_filter_module_extensions($module) {
  * @return bool
  */
 function _drupal_origins_is_valid_extension($extension) {
-   return (boolean)preg_match('/drupal_origins_/', $extension);
+  return (boolean) preg_match('/drupal_origins_/', $extension);
 }
