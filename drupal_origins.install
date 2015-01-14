@@ -184,6 +184,69 @@ function drupal_origins_install() {
 
   // Define default settings for pathauto module:
   variable_set('pathauto_transliterate', 1);
+
+  // Elysia cron jobs:
+  $elysia_jobs = array(
+    'captcha_cron' => array(
+      'job_rule' => '4 0 * * *',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'ctools_cron' => array(
+      'job_rule' => '4 0 * * *',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'dblog_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'field_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'node_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'system_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'update_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+    'views_bulk_operations_cron' => array(
+      'job_rule' => '4 0 * * 0',
+      'job_weight' => NULL,
+      'job_disabled' => 0,
+      'job_channel' => NULL,
+    ),
+  );
+
+  foreach ($elysia_jobs as $cron_key => $job) {
+    // Set Job rule:
+    elysia_cron_set($cron_key, false, array('rule' => $job['job_rule']));
+    // Set Job weight:
+    elysia_cron_set($cron_key, false, array('weight' => $job['job_weight']));
+    // Set Job disabled:
+    elysia_cron_set($cron_key, false, array('disable' => $job['job_disabled']));
+    // Set Job chanel:
+    elysia_cron_set($cron_key, false, array('context' => $job['job_channel']));
+  }
 }
 
 /**
