@@ -49,3 +49,9 @@ projects[smtp][version] = "1.2"
 projects[smtp][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
 projects[views_bulk_operations][subdir] = "contrib"
+
+; Themes
+projects[da_vinci][type] = "theme"
+projects[da_vinci][download][type] = git
+projects[da_vinci][download][url] = http://git.drupal.org/sandbox/nguerrero/2385135.git
+projects[da_vinci][download][branch] = 7.x-1.0
