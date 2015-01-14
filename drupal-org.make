@@ -50,6 +50,22 @@ projects[smtp][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
 projects[views_bulk_operations][subdir] = "contrib"
 
+; Drupal Origins Security Extension:
+projects[field_permissions][version] = "1.0-beta2"
+projects[field_permissions][subdir] = "contrib"
+projects[login_security][version] = "1.9"
+projects[login_security][subdir] = "contrib"
+projects[password_policy][version] = "1.9"
+projects[password_policy][subdir] = "contrib"
+projects[autologout][version] = "4.3"
+projects[autologout][subdir] = "contrib"
+projects[securepages][version] = "1.0-beta2"
+projects[securepages][subdir] = "contrib"
+projects[lopd][version] = "1.x-dev"
+projects[lopd][subdir] = "contrib"
+projects[eu_cookie_compliance][version] = "1.14"
+projects[eu_cookie_compliance][subdir] = "contrib"
+
 ; Themes
 projects[da_vinci][type] = "theme"
 projects[da_vinci][download][type] = git
