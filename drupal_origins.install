@@ -251,7 +251,7 @@ function drupal_origins_install() {
   // jQuery Update Settings:
   variable_set('jquery_update_jquery_cdn', 'google');
   variable_set('jquery_update_jquery_admin_version', '1.5');
-  varibale_set('jquery_update_jquery_version', '1.10');
+  variable_set('jquery_update_jquery_version', '1.10');
 
   // Enable themes:
   theme_enable(array('seven', 'da_vinci'));
