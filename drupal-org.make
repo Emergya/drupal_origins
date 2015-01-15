@@ -49,6 +49,8 @@ projects[smtp][version] = "1.2"
 projects[smtp][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
 projects[views_bulk_operations][subdir] = "contrib"
+projects[path_breadcrumbs][version] = "3.1"
+projects[path_breadcrumbs][subdir] = "contrib"
 
 ; Drupal Origins Security Extension:
 projects[field_permissions][version] = "1.0-beta2"
