@@ -68,6 +68,18 @@ projects[lopd][subdir] = "contrib"
 projects[eu_cookie_compliance][version] = "1.14"
 projects[eu_cookie_compliance][subdir] = "contrib"
 
+; Drupal Origins Internationalization Extension:
+projects[l10n_update][version] = "1.1"
+projects[l10n_update][subdir] = "contrib"
+projects[i18n][version] = "1.11"
+projects[i18n][subdir] = "contrib"
+projects[entity_translation][version] = "1.0-beta3"
+projects[entity_translation][subdir] = "contrib"
+projects[title][version] = "1.0-alpha7"
+projects[title][subdir] = "contrib"
+projects[variable][version] = "2.5"
+projects[variable][subdir] = "contrib"
+
 ; Themes
 projects[da_vinci][type] = "theme"
 projects[da_vinci][download][type] = git
