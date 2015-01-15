@@ -44,3 +44,5 @@ dependencies[] = rules_admin
 dependencies[] = ckeditor
 dependencies[] = smtp
 dependencies[] = views_bulk_operations
+dependencies[] = path_breadcrumbs
+dependencies[] = path_breadcrumbs_ui
