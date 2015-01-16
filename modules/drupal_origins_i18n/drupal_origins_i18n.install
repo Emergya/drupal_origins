@@ -2,56 +2,59 @@
 /**
  * @file Define installation settings to Internationalization extension.
  */
-############################
-#### ENTITY TRANSLATION ####
-############################
 
-// Enable language fallback.
-variable_set('locale_field_language_fallback', 1);
-// Clear the entity info cache for the new entity translation settings.
-entity_info_cache_clear();
-menu_rebuild();
+/**
+ * Implements hook_install().
+ */
+function drupal_origins_i18n_install() {
+  ############################
+  #### ENTITY TRANSLATION ####
+  ############################
 
-
-###############
-#### TITLE ####
-###############
-
-// Automatically replace the title field when creating a new bundle.
-$title_settings = variable_get('title_node');
-$title_settings['auto_attach']['title'] = 'title';
-variable_set('title_node', $title_settings);
+  // Enable language fallback.
+  variable_set('locale_field_language_fallback', 1);
 
 
-##############################
-#### INTERNATIONALIZATION ####
-##############################
+  ###############
+  #### TITLE ####
+  ###############
 
-// Active multilingual settings string for all text formats.
-$formats = array();
-foreach (filter_formats() as $key => $value) {
-  $formats[$key] = $value->format;
-  variable_set_value('i18n_string_allowed_formats', $formats);
+  // Automatically replace the title field when creating a new bundle.
+  $title_settings = variable_get('title_node');
+  $title_settings['auto_attach']['title'] = 'title';
+  variable_set('title_node', $title_settings);
+
+
+  ##############################
+  #### INTERNATIONALIZATION ####
+  ##############################
+
+  // Active multilingual settings string for all text formats.
+  $formats = array();
+  foreach (filter_formats() as $key => $value) {
+    $formats[$key] = $value->format;
+    variable_set_value('i18n_string_allowed_formats', $formats);
+  }
+
+  // User interface detection.
+  $negotiation = variable_get("language_negotiation_language", array());
+  $negotiation['locale-url'] = array(
+    'callbacks' => array(
+      'language' => 'locale_language_from_url',
+      'switcher' => 'locale_language_switcher_url',
+      'url_rewrite' => 'locale_language_url_rewrite_url',
+    ),
+    'file' => 'includes/locale.inc',
+  );
+  variable_set("language_negotiation_language", $negotiation);
+
+  // Content detection.
+  $negotiation = variable_get("language_negotiation_language_content", array());
+  $negotiation['locale-interface'] = array(
+    'callbacks' => array(
+      'language' => 'locale_language_from_interface',
+    ),
+    'file' => 'includes/locale.inc',
+  );
+  variable_set("language_negotiation_language_content", $negotiation);
 }
-
-// User interface detection.
-$negotiation = variable_get("language_negotiation_language", array());
-$negotiation['locale-url'] = array(
-  'callbacks' => array(
-    'language' => 'locale_language_from_url',
-    'switcher' => 'locale_language_switcher_url',
-    'url_rewrite' => 'locale_language_url_rewrite_url',
-  ),
-  'file' => 'includes/locale.inc',
-);
-variable_set("language_negotiation_language", $negotiation);
-
-// Content detection.
-$negotiation = variable_get("language_negotiation_language_content", array());
-$negotiation['locale-interface'] = array(
-  'callbacks' => array(
-    'language' => 'locale_language_from_interface',
-  ),
-  'file' => 'includes/locale.inc',
-);
-variable_set("language_negotiation_language_content", $negotiation);
