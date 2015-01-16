@@ -74,4 +74,12 @@ function drupal_origins_security_install() {
     watchdog('password_policy', 'New policy %name created.', array('%name' => $policy['name']),
       WATCHDOG_NOTICE, l(t('edit'), 'admin/config/people/password_policy/' . $pid . '/edit'));
   }
+
+  # # # # # # # # # # # # # #
+  # # AUTOLOGOUT SETTINGS # #
+  # # # # # # # # # # # # # #
+
+  // Enable role timeout for autenticated users:
+  variable_set('autologout_role_2', 1);
+  variable_set('autologout_role_logout', 1);
 }
