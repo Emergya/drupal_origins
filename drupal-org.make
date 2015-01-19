@@ -67,6 +67,8 @@ projects[lopd][version] = "1.x-dev"
 projects[lopd][subdir] = "contrib"
 projects[eu_cookie_compliance][version] = "1.14"
 projects[eu_cookie_compliance][subdir] = "contrib"
+projects[security_review][version] = "1.2"
+projects[security_review][subdir] = "contrib"
 
 ; Drupal Origins Internationalization Extension:
 projects[l10n_update][version] = "1.1"
