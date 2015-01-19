@@ -88,6 +88,16 @@ projects[devel][subdir] = "contrib"
 projects[maillog][version] = "1.0-alpha1"
 projects[maillog][subdir] = "contrib"
 
+; Drupal Origins SEO & Social Extension:
+projects[metatag][version] = "1.4"
+projects[metatag][subdir] = "contrib"
+projects[page_title][version] = "2.7"
+projects[page_title][subdir] = "contrib"
+projects[globalredirect][version] = "1.5"
+projects[globalredirect][subdir] = "contrib"
+projects[service_links][version] = "2.2"
+projects[service_links][subdir] = "contrib"
+
 ; Themes
 projects[da_vinci][type] = "theme"
 projects[da_vinci][download][type] = git
