@@ -10,25 +10,20 @@ function drupal_origins_i18n_install() {
   ############################
   #### ENTITY TRANSLATION ####
   ############################
-
   // Enable language fallback.
   variable_set('locale_field_language_fallback', 1);
-
 
   ###############
   #### TITLE ####
   ###############
-
   // Automatically replace the title field when creating a new bundle.
   $title_settings = variable_get('title_node');
   $title_settings['auto_attach']['title'] = 'title';
   variable_set('title_node', $title_settings);
 
-
   ##############################
   #### INTERNATIONALIZATION ####
   ##############################
-
   // Active multilingual settings string for all text formats.
   $formats = array();
   foreach (filter_formats() as $key => $value) {
