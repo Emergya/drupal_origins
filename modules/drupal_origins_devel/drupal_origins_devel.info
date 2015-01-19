@@ -1,3 +1,7 @@
 name = Drupal Origins Devel Extension
 description = Drupal Origins Devel Extension 
 core = 7.x
+
+; Dependencies:
+dependencies[] = devel
+dependencies[] = maillog
