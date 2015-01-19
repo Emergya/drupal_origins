@@ -80,6 +80,12 @@ projects[title][subdir] = "contrib"
 projects[variable][version] = "2.5"
 projects[variable][subdir] = "contrib"
 
+; Drupal Origins Developer Extension:
+projects[devel][version] = "1.5"
+projects[devel][subdir] = "contrib"
+projects[maillog][version] = "1.0-alpha1"
+projects[maillog][subdir] = "contrib"
+
 ; Themes
 projects[da_vinci][type] = "theme"
 projects[da_vinci][download][type] = git
