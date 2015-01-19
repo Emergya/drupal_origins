@@ -78,7 +78,6 @@ function drupal_origins_security_install() {
   # # # # # # # # # # # # # #
   # # AUTOLOGOUT SETTINGS # #
   # # # # # # # # # # # # # #
-
   // Enable role timeout for autenticated users:
   variable_set('autologout_role_2', 1);
   variable_set('autologout_role_logout', 1);
