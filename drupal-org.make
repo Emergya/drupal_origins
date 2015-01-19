@@ -87,8 +87,6 @@ projects[devel][version] = "1.5"
 projects[devel][subdir] = "contrib"
 projects[maillog][version] = "1.0-alpha1"
 projects[maillog][subdir] = "contrib"
-projects[site_audit][version] = "1.12"
-projects[site_audit][subdir] = "contrib"
 
 ; Themes
 projects[da_vinci][type] = "theme"

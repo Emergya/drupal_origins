@@ -5,4 +5,3 @@ core = 7.x
 ; Dependencies:
 dependencies[] = devel
 dependencies[] = maillog
-dependencies[] = site_audit
