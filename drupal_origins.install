@@ -292,25 +292,30 @@ function drupal_origins_install_tasks() {
 function drupal_origins_extensions_form($form, &$form_state) {
   $form = array();
 
+  $form['main_message'] = array(
+    '#markup' => t('Congratulations! Your Drupal Origins basic installation has finished. Now you might want to enable some of the following extensions in your site. Each of them have been developed for different purposes, they enable some extra modules and add a default settings for each of them. For more info, please read the README.txt file'),
+  );
+
   $extensions = _drupal_origins_get_extensions_definition();
 
   foreach ($extensions as $extension) {
     $extension_container = $extension->name . '_container';
     $form[$extension_container] = array(
-      '#type' => 'container',
+      '#type' => 'fieldset',
       '#attributes' => array('class' => array('extension')),
-    );
-
-    $form[$extension_container]['content'][$extension->name] = array(
-      '#type' => 'checkbox',
       '#title' => $extension->info['name'],
     );
 
-    $form[$extension_container]['content'][$extension->name . '_description'] = array(
+    $form[$extension_container][$extension->name] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable @extension extension', array('@extension' => $extension->info['name'])),
+    );
+
+    $form[$extension_container][$extension->name . '_description'] = array(
       '#markup' => '<span>' . $extension->info['description'] . '</span>',
     );
 
-    $form[$extension_container]['content'][$extension->name . '_modules_container'] =
+    $form[$extension_container][$extension->name . '_modules_container'] =
       _drupal_origins_get_renderable_module_dependencies($extension);
   }
 
@@ -353,7 +358,7 @@ function drupal_origins_install_extensions() {
   }
 
   $batch = array(
-    'title' => t('Installing aditional Drupal Origins extensions'),
+    'title' => st('Installing aditional Drupal Origins extensions'),
     'operations' => $operations,
   );
 
@@ -380,7 +385,7 @@ function _drupal_origins_get_renderable_module_dependencies($module) {
     '#type' => 'container',
     'content' => array(
       $module->name . '_modules_header' => array(
-        '#markup' => '<span>' . st('The following module will be enabled') . '</span>',
+        '#markup' => '<span>' . st('The following modules will be enabled. Please, pay attention in this step, enable this extension only if you need most of them.') . '</span>',
       ),
       $module->name . '_modules' => array(
         '#theme' => 'item_list',
@@ -421,7 +426,7 @@ function _drupal_origins_is_valid_extension($extension) {
  * @param $context
  */
 function _drupal_origins_clear_caches(&$context) {
-  $context['message'] = t('@operation', array('@operation' => 'Clear caches'));
+  $context['message'] = st('@operation', array('@operation' => 'Clear caches'));
   drupal_flush_all_caches();
 }
 
