@@ -33,5 +33,6 @@ ________
 MANTAINERS
 ------------
 Current maintainers:
- * Jose Luis Bellido (jlbellido) -https://www.drupal.org/u/jlbellido
- * Neftalí Guerrero (nguerrero) - https://www.drupal.org/u/nguerrero
+ * Jose Luis Bellido (jlbellido) - https://www.drupal.org/u/jlbellido
+ * Juan José Prieto (jjprieto) - https://www.drupal.org/u/jjprieto
+ * Diego Marrufo (dimaro) - https://www.drupal.org/u/dimaro
