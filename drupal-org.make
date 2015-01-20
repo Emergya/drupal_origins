@@ -107,8 +107,6 @@ projects[colorbox][version] = "2.8"
 projects[colorbox][subdir] = "contrib"
 projects[breakpoints][version] = "1.3"
 projects[breakpoints][subdir] = "contrib"
-projects[context_breakpoint][version] = "1.0-beta3"
-projects[context_breakpoint][subdir] = "contrib"
 
 ; Themes
 projects[da_vinci][type] = "theme"
