@@ -6,3 +6,4 @@ dependencies[] = metatag
 dependencies[] = page_title
 dependencies[] = globalredirect
 dependencies[] = service_links
+dependencies[] = general_services

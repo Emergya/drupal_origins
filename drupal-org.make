@@ -98,8 +98,20 @@ projects[globalredirect][subdir] = "contrib"
 projects[service_links][version] = "2.2"
 projects[service_links][subdir] = "contrib"
 
+; Drupal Origins Extra modules extension:
+projects[flexslider][version] = "2.0-alpha3"
+projects[flexslider][subdir] = "contrib"
+projects[jcarousel][version] = "2.7"
+projects[jcarousel][subdir] = "contrib"
+projects[colorbox][version] = "2.8"
+projects[colorbox][subdir] = "contrib"
+projects[breakpoints][version] = "1.3"
+projects[breakpoints][subdir] = "contrib"
+projects[context_breakpoint][version] = "1.0-beta3"
+projects[context_breakpoint][subdir] = "contrib"
+
 ; Themes
 projects[da_vinci][type] = "theme"
 projects[da_vinci][download][type] = git
 projects[da_vinci][download][url] = http://git.drupal.org/sandbox/nguerrero/2385135.git
-projects[da_vinci][download][branch] = 7.x-1.0
+projects[da_vinci][download][branch] = 7.0
