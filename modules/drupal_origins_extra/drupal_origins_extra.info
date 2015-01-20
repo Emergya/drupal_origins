@@ -1,5 +1,5 @@
-name = Drupal Origins Extra modules
-description = Drupal Origins Extra modules extension.
+name = Drupal Origins Extra modules extension
+description = Drupal Origins Extra modules extension
 core = 7.x
 
 ; Dependencies:
@@ -7,5 +7,3 @@ dependencies[] = flexslider
 dependencies[] = jcarousel
 dependencies[] = colorbox
 dependencies[] = breakpoints
-dependencies[] = context_breakpoint
-dependencies[] = dropdown_menu_user
