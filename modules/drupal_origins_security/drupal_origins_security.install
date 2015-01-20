@@ -15,7 +15,7 @@ function drupal_origins_security_install() {
   variable_set('login_security_notice_attempts_available', 1);
 
   // Get super admin user for configure teh following parameters:
-  $admin_user = db_query('SELECT name FROM {users} WHERE uid = 1')->fetchAssoc();
+  $admin_user = db_query('SELECT name FROM {users} WHERE uid = 1')->fetchObject();
   variable_set('login_security_user_blocked_email_user', $admin_user->name);
   variable_set('login_security_login_activity_email_user', $admin_user->name);
 

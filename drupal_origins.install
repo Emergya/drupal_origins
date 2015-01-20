@@ -293,7 +293,7 @@ function drupal_origins_extensions_form($form, &$form_state) {
   $form = array();
 
   $form['main_message'] = array(
-    '#markup' => t('Congratulations! Your Drupal Origins basic installation has finished. Now you might want to enable some of the following extensions in your site. Each of them have been developed for different purposes, they enable some extra modules and add a default settings for each of them. For more info, please read the README.txt file'),
+    '#markup' => st('Congratulations! Your Drupal Origins basic installation has finished. Now you might want to enable some of the following extensions in your site. Each of them have been developed for different purposes, they enable some extra modules and add a default settings for each of them. For more info, please read the README.txt file'),
   );
 
   $extensions = _drupal_origins_get_extensions_definition();
@@ -317,6 +317,12 @@ function drupal_origins_extensions_form($form, &$form_state) {
 
     $form[$extension_container][$extension->name . '_modules_container'] =
       _drupal_origins_get_renderable_module_dependencies($extension);
+
+    $readme_link = l('README.txt', drupal_get_path('module', $extension->name) . '/README.txt', array('absolute' => TRUE));
+    $form[$extension_container][$extension->name . '_full_description'] = array(
+      '#markup' => '<div>' . t('Full info about @extension is available at !url',
+          array('@extension' => $extension->info['name'], '!url' => $readme_link)) . '</div>',
+    );
   }
 
   $form['submit'] = array(
