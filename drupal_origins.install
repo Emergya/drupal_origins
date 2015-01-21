@@ -303,7 +303,7 @@ function drupal_origins_extensions_form($form, &$form_state) {
     $form[$extension_container] = array(
       '#type' => 'fieldset',
       '#attributes' => array('class' => array('extension')),
-      '#title' => $extension->info['name'],
+      '#title' => check_plain($extension->info['name']),
     );
 
     $form[$extension_container][$extension->name] = array(
