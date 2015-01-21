@@ -1,4 +1,12 @@
 <?php
 /**
- * @file Contains drupal hooks definitions for drupal_origins_seo_social module.
+ * @file
+ * Contains drupal hooks definitions for drupal_origins_seo_social module.
  */
+
+/**
+ * Implements hook_help().
+ */
+function drupal_origins_seo_social_help() {
+
+}

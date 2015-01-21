@@ -7,9 +7,10 @@
  * Implements hook_install().
  */
 function drupal_origins_security_install() {
-  # # # # # # # # # # # # # # # #
-  # # LOGIN SECURITY SETTINGS # #
-  # # # # # # # # # # # # # # # #
+  // Get the proper localization function.
+  $t = get_t();
+
+  // LOGIN SECURITY SETTINGS.
   variable_set('login_security_track_time', 24);
   variable_set('login_security_host_wrong_count', 5);
   variable_set('login_security_host_wrong_count_hard', 10);
@@ -22,9 +23,7 @@ function drupal_origins_security_install() {
   variable_set('login_security_user_blocked_email_user', $admin_user->name);
   variable_set('login_security_login_activity_email_user', $admin_user->name);
 
-  # # # # # # # # # # # # # # # #
-  # # PASSWORD POLICY SETTINGS # #
-  # # # # # # # # # # # # # # # #
+  // PASSWORD POLICY SETTINGS.
   // General password policy settings:
   variable_set('password_policy_block', 1);
   variable_set('password_policy_show_restrictions', 1);
@@ -75,26 +74,22 @@ function drupal_origins_security_install() {
       ->execute();
     // Notify by watchdog:
     watchdog('password_policy', 'New policy %name created.', array('%name' => $policy['name']),
-      WATCHDOG_NOTICE, l(st('edit'), 'admin/config/people/password_policy/' . $pid . '/edit'));
+      WATCHDOG_NOTICE, l($t('edit'), 'admin/config/people/password_policy/' . $pid . '/edit'));
   }
 
-  # # # # # # # # # # # # # #
-  # # AUTOLOGOUT SETTINGS # #
-  # # # # # # # # # # # # # #
+  // AUTOLOGOUT SETTINGS.
   // Enable role timeout for autenticated users:
   variable_set('autologout_role_2', 1);
   variable_set('autologout_role_logout', 1);
 
-  # # # # # # # # # # # # # # # # # # #
-  # # EU COOKIE COMPLIANCE SETTINGS # #
-  # # # # # # # # # # # # # # # # # # #
+  // EU COOKIE COMPLIANCE SETTINGS.
   // Add permission 'display EU Cookie Compliance popup' to all roles:
   $permissions = array('display EU Cookie Compliance popup' => 'display EU Cookie Compliance popup');
   user_role_grant_permissions(1, array_keys($permissions));
   user_role_grant_permissions(2, array_keys($permissions));
   user_role_grant_permissions(3, array_keys($permissions));
 
-  // customize the default popup settings:
+  // Customize the default popup settings:
   $eu_popup_settings = eu_cookie_compliance_get_settings();
   if (!empty($eu_popup_settings)) {
     global $user, $language;
@@ -103,12 +98,12 @@ function drupal_origins_security_install() {
     $eu_popup_settings['popup_enabled'] = 1;
     $eu_popup_settings['popup_clicking_confirmation'] = 0;
     $eu_popup_settings['popup_position'] = 0;
-    $eu_popup_settings['popup_agree_button_message'] = st('OK, I agree');
-    $eu_popup_settings['popup_disagree_button_message'] = st('No, give me more info');
+    $eu_popup_settings['popup_agree_button_message'] = $t('OK, I agree');
+    $eu_popup_settings['popup_disagree_button_message'] = $t('No, give me more info');
     $eu_popup_settings['popup_agreed_enabled'] = 0;
     $eu_popup_settings['popup_hide_agreed'] = 0;
-    $eu_popup_settings['popup_find_more_button_message'] = st('More info');
-    $eu_popup_settings['popup_hide_button_message'] = st('Hide');
+    $eu_popup_settings['popup_find_more_button_message'] = $t('More info');
+    $eu_popup_settings['popup_hide_button_message'] = $t('Hide');
     $eu_popup_settings['popup_link_new_window'] = 1;
     $eu_popup_settings['popup_height'] = '';
     $eu_popup_settings['popup_width'] = '100%';
@@ -133,7 +128,10 @@ function drupal_origins_security_install() {
     $private_policy_wrapper->body->set(array('value' => 'A bunch of text about things that interest me'));
     $private_policy_wrapper->save();
 
-    // Add the default page with private policies to EU cookie compliance setting:
+    /*
+     *  Add the default page with private policies to EU cookie compliance
+     *  setting:
+     */
     if ($private_policy_page_id = $private_policy_wrapper->getIdentifier()) {
       $eu_popup_settings['popup_link'] = 'node/' . $private_policy_page_id;
     }
