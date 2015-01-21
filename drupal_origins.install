@@ -10,8 +10,9 @@
  *
  * @see system_install()
  */
-
 function drupal_origins_install() {
+  // Get the proper localization function.
+  $t = get_t();
 
   // Add filtered html text format:
   $filtered_html_format = array(
@@ -88,9 +89,9 @@ function drupal_origins_install() {
   $types = array(
     array(
       'type' => 'page',
-      'name' => st('Basic page'),
+      'name' => $t('Basic page'),
       'base' => 'node_content',
-      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'description' => $t("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
       'custom' => 1,
       'modified' => 1,
       'locked' => 0,
@@ -107,10 +108,12 @@ function drupal_origins_install() {
   variable_set('node_options_page', array('status'));
   variable_set('comment_page', COMMENT_NODE_HIDDEN);
 
-  // Don't display date and author information for "Basic page" nodes by default.
+  // Don't display date and author information for "Basic page" nodes by
+  // default.
   variable_set('node_submitted_page', FALSE);
 
-  // Enable user picture support and set the default to a square thumbnail option.
+  // Enable user picture support and set the default to a square thumbnail
+  // option.
   variable_set('user_pictures', '1');
   variable_set('user_picture_dimensions', '1024x1024');
   variable_set('user_picture_file_size', '800');
@@ -124,17 +127,18 @@ function drupal_origins_install() {
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array(
     'access content',
     'access comments',
-    $filtered_html_permission
+    $filtered_html_permission,
   ));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array(
     'access content',
     'access comments',
     'post comments',
     'skip comment approval',
-    $filtered_html_permission
+    $filtered_html_permission,
   ));
 
-  // Create a default role for site administrators, with all available permissions assigned.
+  // Create a default role for site administrators, with all available
+  // permissions assigned.
   $admin_role = new stdClass();
   $admin_role->name = 'administrator';
   $admin_role->weight = 2;
@@ -150,7 +154,7 @@ function drupal_origins_install() {
 
   // Create a Home link in the main menu.
   $item = array(
-    'link_title' => st('Home'),
+    'link_title' => $t('Home'),
     'link_path' => '<front>',
     'menu_name' => 'main-menu',
   );
@@ -167,10 +171,6 @@ function drupal_origins_install() {
     ->execute();
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
-
-  # # # # # # # # # # # # # # # # # # #
-  # # Contrib modules configuration # #
-  # # # # # # # # # # # # # # # # # # #
 
   // Define forms with captcha enabled:
   module_load_include('inc', 'captcha');
@@ -286,10 +286,13 @@ function drupal_origins_install_tasks() {
 
 /**
  * Return the Drupal origins extension step form.
- * @param $form
- * @param $form_state
+ *
+ * @param array $form
+ *   Form definition array.
+ * @param array $form_state
+ *    Form state array.
  */
-function drupal_origins_extensions_form($form, &$form_state) {
+function drupal_origins_extensions_form(array $form, array &$form_state) {
   $form = array();
 
   $form['main_message'] = array(
@@ -315,10 +318,10 @@ function drupal_origins_extensions_form($form, &$form_state) {
       '#markup' => '<span>' . $extension->info['description'] . '</span>',
     );
 
-    $form[$extension_container][$extension->name . '_modules_container'] =
-      _drupal_origins_get_renderable_module_dependencies($extension);
+    $form[$extension_container][$extension->name . '_modules_container']
+      = _drupal_origins_get_renderable_module_dependencies($extension);
 
-    $readme_link = l('README.txt', drupal_get_path('module', $extension->name) . '/README.txt', array('absolute' => TRUE));
+    $readme_link = l(t('README.txt'), drupal_get_path('module', $extension->name) . '/README.txt', array('absolute' => TRUE));
     $form[$extension_container][$extension->name . '_full_description'] = array(
       '#markup' => '<div>' . t('Full info about @extension is available at !url',
           array('@extension' => $extension->info['name'], '!url' => $readme_link)) . '</div>',
@@ -349,7 +352,9 @@ function drupal_origins_extensions_form_submit($form, &$form_state) {
 
 /**
  * Define the batch process to enable the extensions required.
+ *
  * @return array
+ *   $batch
  */
 function drupal_origins_install_extensions() {
   $modules = variable_get('drupal_origins_extensions', array());
@@ -373,7 +378,9 @@ function drupal_origins_install_extensions() {
 
 /**
  * Retrieve the drupal_origins extensions module definition.
+ *
  * @return array
+ *   $modules_filtered
  */
 function _drupal_origins_get_extensions_definition() {
   $module_definitions = system_rebuild_module_data();
@@ -382,9 +389,13 @@ function _drupal_origins_get_extensions_definition() {
 }
 
 /**
- * Generate a rendereable array with the modules dependencies given a module info.
- * @param $module
- * @return array $render
+ * Generate a rendereable array with the modules dependencies given a module.
+ *
+ * @param object $module
+ *   Module info object.
+ *
+ * @return array
+ *   $render
  */
 function _drupal_origins_get_renderable_module_dependencies($module) {
   $render = array(
@@ -410,26 +421,36 @@ function _drupal_origins_get_renderable_module_dependencies($module) {
 
 /**
  * Filter the given module by if it's a drupal origins extension or not.
- * @param $module
+ *
+ * @param object $module
+ *   Module definition.
+ *
  * @return bool
+ *   $is_extension
  */
 function _drupal_origins_filter_module_extensions($module) {
-  return _drupal_origins_is_valid_extension($module->name);
+  $is_extension = _drupal_origins_is_valid_extension($module->name);
+  return $is_extension;
 }
 
 /**
  * Check the given extension is a valid drupal_origins extension.
- * @param $extension
+ *
+ * @param string $extension
+ *   Extension name.
+ *
  * @return bool
+ *   $is_valid
  */
 function _drupal_origins_is_valid_extension($extension) {
-  return (boolean) preg_match('/drupal_origins_/', $extension);
+  $is_valid = (boolean) preg_match('/drupal_origins_/', $extension);
+  return $is_valid;
 }
 
 /**
  * Auxiliary function which clear all caches.
- * @see drupal_origins_install_extensions.
- * @param $context
+ *
+ * @see drupal_origins_install_extensions
  */
 function _drupal_origins_clear_caches(&$context) {
   $context['message'] = st('@operation', array('@operation' => 'Clear caches'));
@@ -438,9 +459,11 @@ function _drupal_origins_clear_caches(&$context) {
 
 /**
  * Auxiliary function which enable a list of modules.
- * @see drupal_origins_install_extensions.
- * @param $module
- * @param $context
+ *
+ * @param string $module
+ *   Module to enable.
+ *
+ * @see drupal_origins_install_extensions
  */
 function _drupal_origins_enable_module($module, &$context) {
   module_enable(array($module));
