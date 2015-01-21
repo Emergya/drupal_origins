@@ -1,1 +1,4 @@
 <?php
+/**
+ * @file Contains drupal hooks definitions for drupal_origins_devel module.
+ */

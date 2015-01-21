@@ -1,4 +1,7 @@
 <?php
+/**
+ * @file Define some custom settings for drupal_origins_security during install proccess.
+ */
 
 /**
  * Implements hook_install().
@@ -72,7 +75,7 @@ function drupal_origins_security_install() {
       ->execute();
     // Notify by watchdog:
     watchdog('password_policy', 'New policy %name created.', array('%name' => $policy['name']),
-      WATCHDOG_NOTICE, l(t('edit'), 'admin/config/people/password_policy/' . $pid . '/edit'));
+      WATCHDOG_NOTICE, l(st('edit'), 'admin/config/people/password_policy/' . $pid . '/edit'));
   }
 
   # # # # # # # # # # # # # #
@@ -100,12 +103,12 @@ function drupal_origins_security_install() {
     $eu_popup_settings['popup_enabled'] = 1;
     $eu_popup_settings['popup_clicking_confirmation'] = 0;
     $eu_popup_settings['popup_position'] = 0;
-    $eu_popup_settings['popup_agree_button_message'] = t('OK, I agree');
-    $eu_popup_settings['popup_disagree_button_message'] = t('No, give me more info');
+    $eu_popup_settings['popup_agree_button_message'] = st('OK, I agree');
+    $eu_popup_settings['popup_disagree_button_message'] = st('No, give me more info');
     $eu_popup_settings['popup_agreed_enabled'] = 0;
     $eu_popup_settings['popup_hide_agreed'] = 0;
-    $eu_popup_settings['popup_find_more_button_message'] = t('More info');
-    $eu_popup_settings['popup_hide_button_message'] = t('Hide');
+    $eu_popup_settings['popup_find_more_button_message'] = st('More info');
+    $eu_popup_settings['popup_hide_button_message'] = st('Hide');
     $eu_popup_settings['popup_link_new_window'] = 1;
     $eu_popup_settings['popup_height'] = '';
     $eu_popup_settings['popup_width'] = '100%';
