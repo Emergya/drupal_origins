@@ -7,17 +7,18 @@ CONTENTS OF THIS FILE
 
 INTRODUCTION
 ------------
-Drupal Origins Security & Legal extension (drupal_origins_security) is a basic module which enable some basic drupal modules, and their dependencies, it is focused at security
-and legal conditions.
+Drupal Origins Security & Legal extension (drupal_origins_security) is a basic module which enable some basic drupal
+modules, and their dependencies, it is focused at security and legal conditions.
 
-Additionally, this module set an additional default settings during the install process for be ready to start developing your site.
-
-For more info about which modules and default settings are enabled with drupal_origins_security, please see the section "Enabled modules and additional settings." on this file.
+Additionally, this module set an additional default settings during the install process for be ready to start developing
+your site.
+For more info about which modules and default settings are enabled with drupal_origins_security, please see the section
+"Enabled modules and additional settings." on this file.
 
 ENABLED MODULES AND ADDITIONAL SETTINGS
 --------------------------------------
-As it was said at "Introduction" section, drupal origins security extension enable several modules and set some additional settings. It's focused in security and
-legal conditions. The previous modules and settings are the following.
+As it was said at "Introduction" section, drupal origins security extension enable several modules and set some
+additional settings. It's focused in security and legal conditions. The previous modules and settings are the following.
 
  * Field Permissions (https://www.drupal.org/project/field_permissions)
    * Additional settings: No additional settings added.
@@ -35,7 +36,8 @@ legal conditions. The previous modules and settings are the following.
 
  * Password policy (https://www.drupal.org/project/password_policy)
    * Additional settings:
-     * Blocking expired accounts: set to "Expired accounts are not blocked. Users whose accounts have expired will be forced to change their passwords at next login."
+     * Blocking expired accounts: set to "Expired accounts are not blocked. Users whose accounts have expired will be
+     forced to change their passwords at next login."
      * Show restrictions on password change page.
      * Force password change on reset.
      * Created the following password policies:
