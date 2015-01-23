@@ -9,10 +9,10 @@
  */
 function drupal_origins_seo_social_help($path, $arg) {
   switch ($path) {
-    case 'admin/help#drupal_origins_security':
-      $module_path = drupal_get_path('module', 'drupal_origins_security');
+    case 'admin/help#drupal_origins_seo_social':
+      $module_path = drupal_get_path('module', 'drupal_origins_seo_social');
       $output = '';
-      $output .= '<h3>Drupal Origins i18n Extension</h3>';
+      $output .= '<h3>Drupal Origins SEO & Social Extension</h3>';
       $output .= '<p>Drupal Origins SEO & Social extension
                  (drupal_origins_seo_social) is a basic module which enable some
                  basic drupal modules, and their dependencies, it is focused at
