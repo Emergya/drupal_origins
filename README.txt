@@ -104,6 +104,7 @@ multilingual.
           * Alternate jQuery version for administrative pages: 1.5
       * Libraries : https://www.drupal.org/project/libraries
       * Diff: https://www.drupal.org/project/diff
+      * Coffee: https://www.drupal.org/project/coffee
       * Entity: https://www.drupal.org/project/entity
       * Date: https://www.drupal.org/project/date
         * Submodules enabled:
@@ -113,6 +114,7 @@ multilingual.
       * CTools: https://www.drupal.org/project/ctools
         * Submodules enabled:
           * Page manager.
+          * Views content pane.
       * Views: https://www.drupal.org/project/views
         * Submodules enabled:
           * Views UI
@@ -120,11 +122,14 @@ multilingual.
         * Submodules enabled:
           * Views content.
       * Features: https://www.drupal.org/project/features
+      * Features Extra: https://www.drupal.org/project/features_extra
+      * Strongarm: https://www.drupal.org/project/strongarm
       * Elysia Cron: https://www.drupal.org/project/elysia_cron
       * Rules: https://www.drupal.org/project/rules
         * Submodules enabled:
           * Rules admin
       * CKeditor: https://www.drupal.org/project/ckeditor
+      * Token: https://www.drupal.org/project/token
       * Smtp: https://www.drupal.org/project/smtp
       * Views Bulk Operations:
         https://www.drupal.org/project/views_bulk_operations
