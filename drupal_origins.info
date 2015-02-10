@@ -1,5 +1,5 @@
 name = Drupal Origins
-description = Drupal Origins profile
+description = Drupal Origins is kick starter profile.
 core = 7.x
 
 ; Core extensions
@@ -33,11 +33,13 @@ dependencies[] = date_popup
 dependencies[] = entityreference
 dependencies[] = link
 dependencies[] = ctools
+dependencies[] = views_content
 dependencies[] = page_manager
 dependencies[] = views
 dependencies[] = panels
 dependencies[] = views_ui
 dependencies[] = features
+dependencies[] = strongarm
 dependencies[] = elysia_cron
 dependencies[] = rules
 dependencies[] = rules_admin

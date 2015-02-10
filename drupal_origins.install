@@ -294,9 +294,9 @@ function drupal_origins_install_tasks() {
  */
 function drupal_origins_extensions_form(array $form, array &$form_state) {
   $form = array();
-
+  $readme_link = l(t('README.txt'), drupal_get_path('module', 'drupal_origins') . '/README.txt', array('absolute' => TRUE));
   $form['main_message'] = array(
-    '#markup' => st('Congratulations! Your Drupal Origins basic installation has finished. Now you might want to enable some of the following extensions in your site. Each of them have been developed for different purposes, they enable some extra modules and add a default settings for each of them. For more info, please read the README.txt file'),
+    '#markup' => st('Congratulations! Your Drupal Origins basic installation has finished. Now you might want to enable some of the following Drupal Origin extensions in your site. Each of them have been developed for different purposes, they enable some extra modules and add a default settings for each of them. For more info, please read the !readme_link file', array('!readme_link' => $readme_link)),
   );
 
   $extensions = _drupal_origins_get_extensions_definition();

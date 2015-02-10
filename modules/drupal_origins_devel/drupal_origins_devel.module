@@ -8,5 +8,21 @@
  * Implements hook_help().
  */
 function drupal_origins_devel_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#drupal_origins_devel':
+      $module_path = drupal_get_path('module', 'drupal_origins_devel');
+      $output = '';
+      $output .= '<h3>Drupal Origins Devel Extension</h3>';
+      $output .= '<p>Drupal Origins Devel extension (drupal_origins_devel) is a
+                  basic module which enable some basic drupal modules, and their
+                  dependencies, it is focused at site development. Additionally,
+                  this module set an additional default settings during the
+                  install process for be ready to start developing your site.
+                  </p>';
+      $output .= '<p>Please, for more info and full docuentation see the ';
+      $output .= l(t('README.txt'), $module_path . '/README.txt');
+      $output .= '</p>';
 
+      return $output;
+  }
 }
