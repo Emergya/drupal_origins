@@ -24,8 +24,8 @@ CONTENTS OF THIS FILE
  social networks. The previous modules and settings are the following.
 
     * Metatag (https://www.drupal.org/project/metatag)
-    * Page Title (https://www.drupal.org/project/page_title)
     * Global Redirect (https://www.drupal.org/project/globalredirect)
     * Service Links (https://www.drupal.org/project/service_links)
       * Submodules enabled:
         * General services
+    * XML Sitemap (https://www.drupal.org/project/xmlsitemap)
