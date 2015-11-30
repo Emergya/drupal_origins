@@ -34,7 +34,7 @@ INSTALLATION
 
 Using drush:
 
-0.- drush make build-drupal-origins.make /path/to/new/project
+0.- drush make build-drupal_origins.make "/path/to/new/project"
 1.- cd /path/to/new/project
 2.- drush site-install drupal_origins
      --db-url='mysql://MYSQLUSER:MYSQLPASS@HOST:PORT/DBNAME'
@@ -136,6 +136,7 @@ multilingual.
       * Path Breadcrumbs: https://www.drupal.org/project/path_breadcrumbs
         * Submodules enabled:
           * Path Breadcrumbs UI
+      * Site Map: https://www.drupal.org/project/site_map
 
   * Drupal Origins Extensions:
 
