@@ -36,10 +36,12 @@ dependencies:
   - views
   - views_ui
 # Contrib Extensions
+# Seguro que van
   - admin_toolbar
   - pathauto
   - token
   - libraries
+# Por revisar
 # - captcha
 # - diff
 # - entity
