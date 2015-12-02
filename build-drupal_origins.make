@@ -8,5 +8,5 @@ includes[] = drupal-org.make
 
 projects[drupal_origins][type] = profile
 projects[drupal_origins][download][type] = git
-projects[drupal_origins][download][url] = http://git.drupal.org/project/drupal_origins.git
+projects[drupal_origins][download][url] = git@github.com:Emergya/drupal_origins.git
 projects[drupal_origins][download][branch] = 8.x-1.x
