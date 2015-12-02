@@ -170,9 +170,10 @@ multilingual.
       That modules has no a concrete focus, but they are very frequent at drupal
       sites. You can see more details at it README.TXT.
 
-MANTAINERS
+MAINTAINERS
 ----------
 Current maintainers:
  * Jose Luis Bellido (jlbellido) - https://www.drupal.org/u/jlbellido
  * Juan José Prieto (jjprieto) - https://www.drupal.org/u/jjprieto
  * Diego Marrufo (dimaro) - https://www.drupal.org/u/dimaro
+ * José Antonio Rodríguez Carvajal (joe_carvajal) - https://www.drupal.org/u/joe_carvajal

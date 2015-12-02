@@ -37,8 +37,8 @@ dependencies:
   - views_ui
 # Contrib Extensions
 # - admin_toolbar
-# - pathauto
-# - token
+  - pathauto
+  - token
 # - captcha
 # - jquery_update
 # - libraries
@@ -65,4 +65,4 @@ dependencies:
 # - path_breadcrumbs_ui
 
 themes:
-#  -da_vinci
+  - da_vinci

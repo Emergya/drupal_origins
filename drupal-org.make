@@ -44,7 +44,7 @@ projects[token][subdir] = contrib
 ;projects[xmlsitemap][subdir] = contrib
 
 ; Themes
-;projects[da_vinci][download][branch] = 8.x-1.0-alpha
-;projects[da_vinci][download][type] = git
-;projects[da_vinci][subdir] = contrib
-;projects[da_vinci][type] = theme
+projects[da_vinci][download][branch] = 8.x-1.0-alpha
+projects[da_vinci][download][type] = git
+projects[da_vinci][subdir] = contrib
+projects[da_vinci][type] = theme
