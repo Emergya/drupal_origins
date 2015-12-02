@@ -36,12 +36,11 @@ dependencies:
   - views
   - views_ui
 # Contrib Extensions
-# - admin_toolbar
+  - admin_toolbar
   - pathauto
   - token
+  - libraries
 # - captcha
-# - jquery_update
-# - libraries
 # - diff
 # - entity
 # - date
@@ -66,3 +65,4 @@ dependencies:
 
 themes:
   - da_vinci
+  - seven

@@ -2,6 +2,9 @@ api = 2
 core = 8.x
 
 ; Modules
+projects[admin_toolbar][download][branch] = 8.x-1.10
+projects[admin_toolbar][download][type] = git
+projects[admin_toolbar][subdir] = contrib
 ;projects[captcha][download][branch] = 8.x-1.x
 ;projects[captcha][download][type] = git
 ;projects[captcha][subdir] = contrib
@@ -23,9 +26,9 @@ core = 8.x
 ;projects[layout_plugin][download][branch] = 8.x-1.x
 ;projects[layout_plugin][download][type] = git
 ;projects[layout_plugin][subdir] = contrib
-;projects[libraries][download][branch] = 8.x-3.x
-;projects[libraries][download][type] = git
-;projects[libraries][subdir] = contrib
+projects[libraries][download][branch] = 8.x-3.x
+projects[libraries][download][type] = git
+projects[libraries][subdir] = contrib
 ;projects[page_manager][download][branch] = 8.x-1.x
 ;projects[page_manager][download][type] = git
 ;projects[page_manager][subdir] = contrib
