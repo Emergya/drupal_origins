@@ -1,9 +1,0 @@
-name = Drupal Origins SEO Extension
-description = Drupal Origins SEO Extension
-core = 7.x
-
-dependencies[] = metatag
-dependencies[] = globalredirect
-dependencies[] = service_links
-dependencies[] = general_services
-dependencies[] = xmlsitemap

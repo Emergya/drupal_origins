@@ -7,6 +7,7 @@
 /**
  * Implements hook_help().
  */
+/*
 function drupal_origins_help($path, $arg) {
   switch ($path) {
     case 'admin/help#drupal_origins':
@@ -25,3 +26,4 @@ function drupal_origins_help($path, $arg) {
       return $output;
   }
 }
+*/

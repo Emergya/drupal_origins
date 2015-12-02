@@ -1,8 +1,10 @@
 ; Include the definition for how to build Drupal core directly.
 api = 2
-core = 7.x
+core = 8.x
 
-projects[drupal][version] = 7.41
+; Core
+projects[drupal][download][tag] = 8.0.0
+projects[drupal][download][type] = git
+projects[drupal][type] = core
 
-; Patches added:
-projects[drupal][patch][] = "http://drupal.org/files/issues/1349080-195-d7-move-access-to-join-condition.patch"
+; Patches

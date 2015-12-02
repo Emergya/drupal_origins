@@ -1,0 +1,68 @@
+name: Drupal Origins
+type: profile
+description: 'Drupal Origins is kickstarter profile.'
+core: 8.x
+
+dependencies:
+# Core extensions
+# Seguro que van
+  - automated_cron
+  - block
+  - ckeditor
+  - comment
+  - contextual
+  - datetime
+  - dblog
+  - field_ui
+  - file
+  - help
+  - image
+  - node
+  - path
+  - taxonomy
+# Por revisar
+  - block_content
+  - breakpoint
+  - config
+  - dynamic_page_cache
+  - editor
+  - menu_link_content
+  - menu_ui
+  - options
+  - page_cache
+  - quickedit
+  - toolbar
+  - update
+  - views
+  - views_ui
+# Contrib Extensions
+# - admin_toolbar
+# - pathauto
+# - token
+# - captcha
+# - jquery_update
+# - libraries
+# - diff
+# - entity
+# - date
+# - date_popup
+# - entityreference
+# - link
+# - ctools
+# - views_content
+# - page_manager
+# - views
+# - panels
+# - views_ui
+# - features
+# - strongarm
+# - elysia_cron
+# - rules
+# - rules_admin
+# - smtp
+# - views_bulk_operations
+# - path_breadcrumbs
+# - path_breadcrumbs_ui
+
+themes:
+#  -da_vinci
