@@ -5,65 +5,43 @@ core: 8.x
 
 dependencies:
 # Core extensions
-# Seguro que van
   - automated_cron
   - block
+  - block_content
+  - breakpoint
   - ckeditor
   - comment
+  - config
   - contextual
   - datetime
   - dblog
+  - dynamic_page_cache
+  - editor
+  - field
   - field_ui
   - file
   - help
   - image
-  - node
-  - path
-  - taxonomy
-# Por revisar
-  - block_content
-  - breakpoint
-  - config
-  - dynamic_page_cache
-  - editor
+  - link
   - menu_link_content
   - menu_ui
+  - node
   - options
+  - path
   - page_cache
-  - quickedit
+  - taxonomy
   - toolbar
   - update
   - views
   - views_ui
 # Contrib Extensions
-# Seguro que van
   - admin_toolbar
+  - admin_toolbar_tools
+  - captcha
+  - layout_plugin
+  - libraries
   - pathauto
   - token
-  - libraries
-# Por revisar
-# - captcha
-# - diff
-# - entity
-# - date
-# - date_popup
-# - entityreference
-# - link
-# - ctools
-# - views_content
-# - page_manager
-# - views
-# - panels
-# - views_ui
-# - features
-# - strongarm
-# - elysia_cron
-# - rules
-# - rules_admin
-# - smtp
-# - views_bulk_operations
-# - path_breadcrumbs
-# - path_breadcrumbs_ui
 
 themes:
   - da_vinci
