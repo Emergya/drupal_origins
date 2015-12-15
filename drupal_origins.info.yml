@@ -29,6 +29,7 @@ dependencies:
   - options
   - path
   - page_cache
+  - responsive_image
   - taxonomy
   - toolbar
   - update
