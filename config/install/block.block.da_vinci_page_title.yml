@@ -1,19 +1,17 @@
 langcode: en
 status: true
 dependencies:
-  module:
-    - help
   theme:
     - da_vinci
-id: da_vinci_help
+id: da_vinci_page_title
 theme: da_vinci
-region: help
-weight: -30
+region: content
+weight: -50
 provider: null
-plugin: help_block
+plugin: page_title_block
 settings:
-  id: help_block
-  label: Help
-  provider: help
+  id: page_title_block
+  label: 'Page title'
+  provider: core
   label_display: '0'
 visibility: {  }
