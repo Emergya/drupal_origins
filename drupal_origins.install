@@ -14,28 +14,28 @@ function drupal_origins_install() {
   // Get the proper localization function.
   $t = get_t();
 
-  // Add filtered html text format:
+  // Add filtered html text format
   $filtered_html_format = array(
     'format' => 'filtered_html',
     'name' => 'Filtered HTML',
     'weight' => 0,
     'filters' => array(
-      // URL filter.
+      // URL filter
       'filter_url' => array(
         'weight' => 0,
         'status' => 1,
       ),
-      // HTML filter.
+      // HTML filter
       'filter_html' => array(
         'weight' => 1,
         'status' => 1,
       ),
-      // Line break filter.
+      // Line break filter
       'filter_autop' => array(
         'weight' => 2,
         'status' => 1,
       ),
-      // HTML corrector filter.
+      // HTML corrector filter
       'filter_htmlcorrector' => array(
         'weight' => 10,
         'status' => 1,
@@ -46,7 +46,7 @@ function drupal_origins_install() {
   $filtered_html_format = (object) $filtered_html_format;
   filter_format_save($filtered_html_format);
 
-  // Add Rich HTML text format:
+  // Add Rich HTML text format
   $rich_html_format = array(
     'format' => 'rich_html',
     'name' => 'Rich HTML',
@@ -172,7 +172,7 @@ function drupal_origins_install() {
   variable_set('admin_theme', 'seven');
   variable_set('node_admin_theme', '1');
 
-  // Define forms with captcha enabled:
+  // Define forms with captcha enabled
   module_load_include('inc', 'captcha');
   $captcha_point_form_ids = array(
     'user_register_form' => 'captcha/Math',
@@ -182,10 +182,10 @@ function drupal_origins_install() {
     captcha_set_form_id_setting($captcha_point_form_id, $captcha_type);
   }
 
-  // Define default settings for pathauto module:
+  // Define default settings for pathauto module
   variable_set('pathauto_transliterate', 1);
 
-  // Elysia cron jobs:
+  // Elysia cron jobs
   $elysia_jobs = array(
     'captcha_cron' => array(
       'job_rule' => '4 0 * * *',
@@ -238,22 +238,25 @@ function drupal_origins_install() {
   );
 
   foreach ($elysia_jobs as $cron_key => $job) {
-    // Set Job rule:
+    // Set Job rule
     elysia_cron_set($cron_key, FALSE, array('rule' => $job['job_rule']));
-    // Set Job weight:
+    // Set Job weight
     elysia_cron_set($cron_key, FALSE, array('weight' => $job['job_weight']));
-    // Set Job disabled:
+    // Set Job disabled
     elysia_cron_set($cron_key, FALSE, array('disable' => $job['job_disabled']));
-    // Set Job chanel:
+    // Set Job channel
     elysia_cron_set($cron_key, FALSE, array('context' => $job['job_channel']));
   }
 
-  // jQuery Update Settings:
+  // jQuery Update Settings
   variable_set('jquery_update_jquery_cdn', 'google');
   variable_set('jquery_update_jquery_admin_version', '1.5');
   variable_set('jquery_update_jquery_version', '1.10');
 
-  // Enable themes:
+  // EU Cookie Compliance settings
+  _drupal_origins_configure_eu_cookie_compliance();
+
+  // Enable themes
   theme_enable(array('seven', 'da_vinci'));
   variable_set('theme_default', 'da_vinci');
   variable_set('admin_theme', 'seven');
@@ -266,12 +269,12 @@ function drupal_origins_install_tasks() {
   $tasks = array();
   $drupal_origins_extensions = variable_get('drupal_origins_extensions', array());
 
-  // Selection of Drupal Origins extensions:
+  // Selection of Drupal Origins extensions
   $tasks['drupal_origins_extensions_form'] = array(
     'display_name' => st('Drupal origins extensions'),
     'type' => 'form',
   );
-  // Install extensions task:
+  // Install extensions task
   $tasks['drupal_origins_install_extensions'] = array(
     'display_name' => st('Install Drupal Origins extensions'),
     'type' => 'batch',
@@ -364,7 +367,7 @@ function drupal_origins_install_extensions() {
       $operations[] = array('_drupal_origins_enable_module', array($module));
     }
 
-    // Clear caches:
+    // Clear caches
     $operations[] = array('_drupal_origins_clear_caches');
   }
 
@@ -468,4 +471,69 @@ function _drupal_origins_clear_caches(&$context) {
 function _drupal_origins_enable_module($module, &$context) {
   module_enable(array($module));
   $context['message'] = st('Installed %module module.', array('%module' => $module));
+}
+
+/**
+ * Helper function to configure EU Cookie compliance settings.
+ */
+function _drupal_origins_configure_eu_cookie_compliance() {
+  // Get the proper localization function.
+  $t = get_t();
+
+  // Add permission 'display EU Cookie Compliance popup' to all roles
+  $permissions = array('display EU Cookie Compliance popup' => 'display EU Cookie Compliance popup');
+  user_role_grant_permissions(1, array_keys($permissions));
+  user_role_grant_permissions(2, array_keys($permissions));
+  user_role_grant_permissions(3, array_keys($permissions));
+
+  // Customize the default popup settings
+  $eu_popup_settings = eu_cookie_compliance_get_settings();
+  if (!empty($eu_popup_settings)) {
+    global $language;
+    $user = new stdClass();
+    $user->uid = 1;
+
+    // Enable popup and set our default settings for EU cookies compliance
+    $eu_popup_settings['popup_enabled'] = 1;
+    $eu_popup_settings['popup_clicking_confirmation'] = 0;
+    $eu_popup_settings['popup_position'] = 0;
+    $eu_popup_settings['popup_agree_button_message'] = $t('OK, I agree');
+    $eu_popup_settings['popup_disagree_button_message'] = $t('No, give me more info');
+    $eu_popup_settings['popup_agreed_enabled'] = 0;
+    $eu_popup_settings['popup_hide_agreed'] = 0;
+    $eu_popup_settings['popup_find_more_button_message'] = $t('More info');
+    $eu_popup_settings['popup_hide_button_message'] = $t('Hide');
+    $eu_popup_settings['popup_link_new_window'] = 1;
+    $eu_popup_settings['popup_height'] = '';
+    $eu_popup_settings['popup_width'] = '100%';
+    $eu_popup_settings['popup_delay'] = 1;
+    $eu_popup_settings['popup_bg_hex'] = '0779BF';
+    $eu_popup_settings['popup_text_hex'] = 'ffffff';
+    $eu_popup_settings['domains_option'] = 1;
+    $eu_popup_settings['domains_list'] = '';
+    $eu_popup_settings['exclude_paths'] = '';
+    $eu_popup_settings['popup_info']['format'] = filter_default_format($user);
+    $eu_popup_settings['popup_agreed']['format'] = filter_default_format($user);
+
+    // Create a basic page with a default private policies
+    $cookies_page_values = array(
+      'type' => 'page',
+      'uid' => $user->uid,
+      'status' => 1,
+      'comment' => 0,
+      'promote' => 0,
+    );
+    $private_policy = entity_create('node', $cookies_page_values);
+    $private_policy_wrapper = entity_metadata_wrapper('node', $private_policy);
+    $private_policy_wrapper->title->set('Private policies');
+    $private_policy_wrapper->body->set(array('value' => 'A bunch of text about things that interest me'));
+    $private_policy_wrapper->save();
+
+    // Add the default page with private policies to EU cookie compliance setting
+    if ($private_policy_page_id = $private_policy_wrapper->getIdentifier()) {
+      $eu_popup_settings['popup_link'] = 'node/' . $private_policy_page_id;
+    }
+    // Set the new settings
+    variable_set('eu_cookie_compliance_' . $language->language, $eu_popup_settings);
+  }
 }

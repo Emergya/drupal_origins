@@ -137,6 +137,14 @@ multilingual.
         * Submodules enabled:
           * Path Breadcrumbs UI
       * Site Map: https://www.drupal.org/project/site_map
+      * EU cookie compliance (https://www.drupal.org/project/eu_cookie_compliance)
+        * Additional settings different from default:
+          * Set "display EU Cookie Compliance popup" permission to all roles.
+          * Added a new node page and set as private policies page, this page ready
+            for edit and set user private policies.
+        * Enabled the popup.
+        * Disabled Consent by clicking.
+        * Disabled thank you message.
 
   * Drupal Origins Extensions:
 

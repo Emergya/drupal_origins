@@ -9,5 +9,4 @@ dependencies[] = password_policy
 dependencies[] = autologout
 dependencies[] = securepages
 dependencies[] = lopd
-dependencies[] = eu_cookie_compliance
 dependencies[] = security_review

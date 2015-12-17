@@ -26,6 +26,6 @@ CONTENTS OF THIS FILE
     * Additional settings:
       * Added permission "access devel information" to all roles.
 
-  * Mailog (https://www.drupal.org/project/mailog)
+  * Maillog (https://www.drupal.org/project/maillog)
     * Additional settings:
       * Allow the e-mails to be sent: Disabled.
